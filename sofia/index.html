@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Jesús Ruiz Martínez - DOME Marketplace Business Card</title>
+  <!-- Blinker Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Easy QRCode JS CDN (extremely robust client-side QR generator) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+  <!-- Dynamic Glowing Backgrounds -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <div class="container">
+    <!-- Business Card Container -->
+    <div class="card">
+      
+      <!-- Top Branding Section -->
+      <div class="card-header">
+        <img src="https://dome-marketplace.eu/assets/themes/dome/dome-logo.svg" alt="DOME Marketplace Logo" class="logo">
+        <span class="tagline">Distributed Open Marketplace for Europe</span>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider"></div>
+
+      <!-- Personal Info Section (OCR-Optimized & High Contrast, Populated Dynamically) -->
+      <div class="personal-info">
+        <h1 class="name" id="card-name">...</h1>
+        <p class="title" id="card-title">...</p>
+        <p class="company" id="card-company">...</p>
+        
+        <div class="contact-details">
+          <div class="detail-item">
+            <span class="label">PHONE</span>
+            <a href="#" class="value" id="ocr-phone">...</a>
+          </div>
+          <div class="detail-item">
+            <span class="label">EMAIL</span>
+            <a href="#" class="value" id="ocr-email">...</a>
+          </div>
+          <div class="detail-item">
+            <span class="label">WEB</span>
+            <a href="#" target="_blank" rel="noopener" class="value" id="ocr-web">...</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- QR Code Interactive Section (Hidden by Default) -->
+      <div id="qr-section" class="qr-section hidden">
+        <div class="qr-container-wrapper">
+          <div id="qrcode" class="qrcode"></div>
+        </div>
+        <p class="qr-instructions">Scan to open this business card</p>
+      </div>
+
+      <!-- Divider (Only visible when QR is shown, handled by CSS) -->
+      <div class="divider qr-divider"></div>
+
+      <!-- Dynamic Action Buttons (Simplified to exactly three) -->
+      <div class="action-buttons">
+        <button id="toggle-qr-btn" class="action-btn secondary" onclick="toggleQRCode()">Show QR Code</button>
+        <button class="action-btn secondary" onclick="downloadVCard()">Download vCard</button>
+        <button class="action-btn primary" onclick="copyToClipboard()">Copy Info</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- App Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
