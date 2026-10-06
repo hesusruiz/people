@@ -1,0 +1,358 @@
+/* Design variables based on DOME theme */
+:root {
+  --dome-bg: #070f24;
+  --dome-card-bg: rgba(12, 28, 56, 0.65);
+  --dome-card-border: rgba(45, 88, 167, 0.4);
+  
+  --primary-glow: rgba(0, 173, 211, 0.3);
+  --secondary-glow: rgba(45, 88, 167, 0.3);
+  
+  /* Brand colors */
+  --color-primary: #00add3;      /* Theme Primary 50 */
+  --color-secondary: #2d58a7;    /* Theme Primary 100 */
+  --color-text-main: #ffffff;
+  --color-text-muted: #abbad6;
+  --color-text-label: #8ba2c9;
+  
+  --font-family: 'Blinker', sans-serif;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset and Layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--dome-bg);
+  color: var(--color-text-main);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+  padding: 16px;
+}
+
+/* Dynamic Glowing Background Effects */
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.bg-glow-1 {
+  width: 300px;
+  height: 300px;
+  background: var(--primary-glow);
+  top: -50px;
+  right: -50px;
+  animation: float-glow 8s ease-in-out infinite alternate;
+}
+
+.bg-glow-2 {
+  width: 350px;
+  height: 350px;
+  background: var(--secondary-glow);
+  bottom: -50px;
+  left: -50px;
+  animation: float-glow 12s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes float-glow {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(40px, 30px) scale(1.1);
+  }
+}
+
+/* Container limits width to mimic portrait mobile viewport */
+.container {
+  width: 100%;
+  max-width: 420px;
+  z-index: 1;
+  perspective: 1000px;
+}
+
+/* Glassmorphism Card Container */
+.card {
+  background: var(--dome-card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--dome-card-border);
+  border-radius: 24px;
+  padding: 28px 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+              inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Branding Header */
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.logo {
+  height: 48px;
+  width: auto;
+  filter: drop-shadow(0 2px 8px rgba(0, 173, 211, 0.2));
+  transition: var(--transition);
+}
+
+.logo:hover {
+  transform: scale(1.03);
+}
+
+.tagline {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* Premium gradient divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-secondary), transparent);
+  width: 100%;
+  opacity: 0.8;
+}
+
+/* Personal Information (OCR-friendly structure) */
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.name {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.company {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+/* OCR and Scannability Details Block */
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(7, 15, 36, 0.4);
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-label);
+  letter-spacing: 1px;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  text-decoration: none;
+  word-break: break-all;
+  transition: var(--transition);
+  display: inline-block;
+  outline: none;
+}
+
+/* Add clear hover state for mobile clickability fallback */
+.value:hover, .value:focus {
+  color: var(--color-primary);
+  transform: translateX(2px);
+}
+
+/* QR Code Section */
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+    overflow: hidden;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 300px;
+  }
+}
+
+/* QR Code Container Styling */
+.qr-container-wrapper {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.qr-container-wrapper:hover {
+  transform: scale(1.02);
+}
+
+.qrcode img {
+  display: block;
+  max-width: 100%;
+}
+
+.qr-instructions {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+}
+
+/* Bottom Action Buttons (Simplified) */
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+/* The primary action spans full width at the bottom */
+.action-buttons button:last-child {
+  grid-column: span 2;
+}
+
+.action-btn {
+  padding: 12px 16px;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn.primary {
+  background: var(--color-primary);
+  color: #070f24;
+}
+
+.action-btn.primary:hover {
+  background: #00cae6;
+  box-shadow: 0 0 15px rgba(0, 173, 211, 0.4);
+}
+
+.action-btn.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-main);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-btn.secondary:hover, .action-btn.secondary.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-primary);
+}
+
+.action-btn:active {
+  transform: scale(0.97);
+}
+
+/* Hide handler */
+.hidden {
+  display: none !important;
+}
+
+/* Divider visibility linked to QR */
+.qr-divider {
+  display: block;
+}
+.qr-section.hidden ~ .qr-divider {
+  display: none;
+}
+
+/* Toast Message Style */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(0, 173, 211, 0.95);
+  color: #070f24;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
